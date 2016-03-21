@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扫雷小游戏</title>
+<script type="text/javascript" src="jquery.1.12.1.js"></script>
+<style type="text/css">
+    .sence{
+        width: 600px;
+        height: 600px;
+        border: 1px solid black;
+    }
+    .block{
+        width: 28px;
+        height: 28px;
+        border: 1px solid black;
+        float: left;
+    }
+    .red{
+        background: url(l.jpg);
+        background-repeat: no-repeat;
+        background-size: 28px 28px;
+    }
+    .blue{
+        background: blue;
+    }
+    .green{
+        background: green;
+    }
+    .scale{
+        animation: fangdaxiao 2s ease;
+    }
+    @keyframes fangdaxiao{
+        0%{
+            transform: scale(1,1);
+        }
+        50%{
+            transform: scale(1.1,1.1);
+        }
+        100%{
+            transform: scale(0.8,0.8);
+        }
+    }
+    .sence div{
+        font-size: 26px;
+        font-weight: bold;
+        color: #333;
+        line-height: 28px;
+        text-align: center;
+    }
+    .sence p{
+        width: 30px;
+        height: 30px;
+        float: left;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+</style>
+</head>
+<body>
+    <div class="sence"></div>
+</body>
+<script type="text/javascript">
+    /*$('.sence').html(function(){
+        var h = '';
+        for (var i = 0; i < 20; i++) {
+            for (var j = 0; j < 20; j++) {
+               h += "<div class='block "+i+"_"+j+"'></div>";
+            }
+        }
+        return h;
+    })
+    // var colors = ['red','blue','green'];
+    // for (var i = 0; i < 400; i++) {
+        // $('.sence div').addClass(function(i){
+            // return colors[i%3];
+        // })
+    // }
+    for (var i = 0; i < 400; i++) {
+        $('.sence div').eq(i).attr('a',function(){
+            return Math.random();
+        });
+        if( $('.sence div').eq(i).attr('a') >= 0.8 ){
+            $('.sence div').eq(i).addClass('blue');
+            $('.sence div').eq(i).attr('lei','true');
+        }
+    }
+    $('.sence div').click(function(){
+            if( $(this).attr('lei') === 'true'){
+                alert('over');
+                $('.sence div').each(function(){
+                    if( $(this).attr('lei')){
+                        $(this).removeClass('blue');
+                        $(this).addClass('red');
+                    }
+                });
+            }else{
+                var a = 0;
+                // if()
+            }
+        })*/
+$(function(){
+    var el = '';
+    var row = 20;
+    var colors = ['red','blue','green'];
+    for (var i = 0; i < Math.pow(row+2,2); i++) {
+        el += '<div></div>';
+    }
+    $('.sence').html(el).find('div').addClass('block');
+    $('.sence div:lt(23)').removeClass();
+    $('.sence div:gt(461)').removeClass();
+    $('.sence div:nth-child(22n)').removeClass();
+    $('.sence div:nth-child(22n+1)').removeClass();
+    $('.sence div').each(function(i){
+        $(this).data('index',i);
+    })
+    $('.sence .block').each(function(){
+        if( Math.random() > 0.8){
+            $(this).data('islei',true);
+            // $(this).text('le')
+        }
+    })
+/*    .addClass(function(){
+        if( $(this).data('islei') ){
+            return 'red';
+        }
+    })
+*/  
+    $('.sence .block').click(function(i){
+        if( $(this).data('islei') ){
+            alert('bow!!');
+            $('.sence .block')
+            .addClass(function(){
+                if( $(this).data('islei') ){
+                    return 'red scale';
+                }
+            })
+            .addClass(function(i){
+                $(this).css('animation-delay',Math.random().toFixed(2)+'s');
+            })
+        }else{
+            var lei = 0;
+            var t = $(this).data('index');
+            if( $('.sence div').eq(t-1).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t+1).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t-23).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t-22).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t-21).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t+23).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t+22).data('islei') ){lei+=1;}
+            if( $('.sence div').eq(t+21).data('islei') ){lei+=1;}
+            // if(lei==0){return;}
+            $(this).html(lei);
+        }
+    })
+
+})
+</script>
+</html>
