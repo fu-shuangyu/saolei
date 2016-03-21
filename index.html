@@ -16,11 +16,15 @@
         border: 1px solid black;
         float: left;
     }
-    .red{
+    .bg{
+        background: url(./sjq.jpg);
+        background-size: 28px 25px;        
+    }
+     .red{
         background: url(l.jpg);
         background-repeat: no-repeat;
         background-size: 28px 28px;
-    }
+    } 
     .blue{
         background: blue;
     }
@@ -108,7 +112,7 @@ $(function(){
     for (var i = 0; i < Math.pow(row+2,2); i++) {
         el += '<div></div>';
     }
-    $('.sence').html(el).find('div').addClass('block');
+    $('.sence').html(el).find('div').addClass('block').addClass('bg');
     $('.sence div:lt(23)').removeClass();
     $('.sence div:gt(461)').removeClass();
     $('.sence div:nth-child(22n)').removeClass();
@@ -122,12 +126,12 @@ $(function(){
             // $(this).text('le')
         }
     })
-/*    .addClass(function(){
+    /*.addClass(function(){
         if( $(this).data('islei') ){
             return 'red';
         }
-    })
-*/  
+    })*/
+  
     $('.sence .block').click(function(i){
         if( $(this).data('islei') ){
             alert('bow!!');
@@ -142,6 +146,7 @@ $(function(){
             })
         }else{
             var lei = 0;
+            $(this).removeClass('bg');
             var t = $(this).data('index');
             if( $('.sence div').eq(t-1).data('islei') ){lei+=1;}
             if( $('.sence div').eq(t+1).data('islei') ){lei+=1;}
